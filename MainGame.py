@@ -1,7 +1,7 @@
+import os
 from Player import Player
 from Board import Board
 from StatusValidator import StatusValidator
-import os
 
 clear = lambda: os.system("clear")
 
@@ -48,11 +48,10 @@ class MainGame:
         if player.name == "":
             print("Tie!")
         else:
-            print(f"{player.name} has won the Game!")
+            print(f"{player.name} has won the game!")
             self.board.ShowBoard()
 
     def GetRowInput(self, playerName):
-        print()
         while True:
             rowInputAsString = input(f"{playerName}: Select a row to put your coin: ")
             clear()
@@ -85,7 +84,7 @@ class MainGame:
                 break
 
             else:
-                print(f"Your cant put your coin in row '{row}'. Try again!")
+                print(f"Your can't put your coin in row '{row}'. Try again!")
 
     def GetUserName(self, playerName: str) -> str:
         userName: str = input(f"{playerName}: Please enter your name: ")
