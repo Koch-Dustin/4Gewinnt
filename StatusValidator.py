@@ -6,78 +6,82 @@ class StatusValidator:
         pass
 
     @classmethod
-    def GameWasWon(cls, row: list[str], playerSymbol: str) -> bool:
-        winnerSequence = playerSymbol * 4
-        sequenceString = str.join("", row)
-        winSequece = winnerSequence in sequenceString
+    def game_was_won(cls, row: list[str], player_symbol: str) -> bool:
+        winner_sequence = player_symbol * 4
+        sequence_string = str.join("", row)
+        win_sequece = winner_sequence in sequence_string
 
-        return winSequece
-
-    @classmethod
-    def IsWin(cls, board: Board, playerMarker: str, column: int):
-        horizontalWin = cls.WinByHorizontalPlacement(board, playerMarker)
-        verticalWin = cls.WinByVerticalPlacement(board, playerMarker, column)
-        diagonalWin = cls.WinByDiagonalPlacement(board, playerMarker)
-
-        return horizontalWin or verticalWin or diagonalWin
+        return win_sequece
 
     @classmethod
-    def WinByHorizontalPlacement(cls, board: Board, playerMarker: str):
+    def is_win(cls, board: Board, player_marker: str, column: int):
+        horizontal_win = cls.win_by_horizontal_placement(board, player_marker)
+        vertical_win = cls.win_by_vertical_placement(board, player_marker, column)
+        diagonal_win = cls.win_by_diagonal_placement(board, player_marker)
+
+        return horizontal_win or vertical_win or diagonal_win
+
+    @classmethod
+    def win_by_horizontal_placement(cls, board: Board, player_marker: str):
         for row in board.board:
-            if cls.GameWasWon(row, playerMarker):
+            if cls.game_was_won(row, player_marker):
                 return True
         return False
 
     @classmethod
-    def WinByVerticalPlacement(cls, board: Board, playerMarker: str, column: int):
+    def win_by_vertical_placement(cls, board: Board, player_marker: str, column: int):
         sequence = []
         column -= 1
         for row in range(len(board.board)):
             sequence.append(board.board[row][column])
-        if cls.GameWasWon(sequence, playerMarker):
+        if cls.game_was_won(sequence, player_marker):
             return True
 
         return False
 
     @classmethod
-    def WinByDiagonalPlacement(cls, board: Board, playerMarker: str):
-        boardArray: list[list[str]] = board.board
-        columns: int = len(boardArray[0])
-        rows: int = len(boardArray) - 1
+    def win_by_diagonal_placement(cls, board: Board, player_marker: str):
+        board_array: list[list[str]] = board.board
+        columns: int = len(board_array[0])
+        rows: int = len(board_array) - 1
 
         for column in range(columns - 3):
             for row in range(rows - 3):
-                firstDiagonalPlacement = boardArray[row][column] == playerMarker
-                secondDiagonalPlacement = (
-                    boardArray[row + 1][column + 1] == playerMarker
+                first_diagonal_placement = board_array[row][column] == player_marker
+                second_diagonal_placement = (
+                    board_array[row + 1][column + 1] == player_marker
                 )
-                thirdDiagonalPlacement = boardArray[row + 2][column + 2] == playerMarker
-                fourthDiagonalPlacement = (
-                    boardArray[row + 3][column + 3] == playerMarker
+                third_diagonal_placement = (
+                    board_array[row + 2][column + 2] == player_marker
+                )
+                fourth_diagonal_placement = (
+                    board_array[row + 3][column + 3] == player_marker
                 )
                 if (
-                    firstDiagonalPlacement
-                    and secondDiagonalPlacement
-                    and thirdDiagonalPlacement
-                    and fourthDiagonalPlacement
+                    first_diagonal_placement
+                    and second_diagonal_placement
+                    and third_diagonal_placement
+                    and fourth_diagonal_placement
                 ):
                     return True
 
         for column in range(columns - 3):
             for row in range(3, rows):
-                firstDiagonalPlacement = boardArray[row][column] == playerMarker
-                secondDiagonalPlacement = (
-                    boardArray[row - 1][column + 1] == playerMarker
+                first_diagonal_placement = board_array[row][column] == player_marker
+                second_diagonal_placement = (
+                    board_array[row - 1][column + 1] == player_marker
                 )
-                thirdDiagonalPlacement = boardArray[row - 2][column + 2] == playerMarker
-                fourthDiagonalPlacement = (
-                    boardArray[row - 3][column + 3] == playerMarker
+                third_diagonal_placement = (
+                    board_array[row - 2][column + 2] == player_marker
+                )
+                fourth_diagonal_placement = (
+                    board_array[row - 3][column + 3] == player_marker
                 )
                 if (
-                    firstDiagonalPlacement
-                    and secondDiagonalPlacement
-                    and thirdDiagonalPlacement
-                    and fourthDiagonalPlacement
+                    first_diagonal_placement
+                    and second_diagonal_placement
+                    and third_diagonal_placement
+                    and fourth_diagonal_placement
                 ):
                     return True
 

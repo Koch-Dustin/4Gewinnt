@@ -4,8 +4,8 @@ from MainGame import MainGame
 def main() -> None:
     game = MainGame()
 
-    game.PrepareGame()
-    game.Play()
+    game.prepare_game()
+    game.play()
 
 
 if __name__ == "__main__":
