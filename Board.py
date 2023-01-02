@@ -1,7 +1,7 @@
 class Board:
     def __init__(self) -> None:
         self.place_holder: str = "_"
-        self.board: list[list[str]] = self.CreateBoard()
+        self.board: list[list[str]] = self.create_board()
 
     def create_board(self):
         empty_game_board: list[list[str]] = [
