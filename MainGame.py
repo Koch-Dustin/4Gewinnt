@@ -73,7 +73,7 @@ class MainGame:
                 print("Please enter a number")
 
     def turn(self, player: Player) -> Player:
-        print(f"Round: {self.round}")
+        print(f"Round: {self.round_number}")
         self.board.show_board()
 
         while True:
